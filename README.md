@@ -20,8 +20,7 @@ This is a personal learning repository where I recreate widget applications from
 Each folder in this repository represents a different practice project. Every project includes:
 - Source code
 - QML files
-- Resource files (if any)
-- Brief description of what the project demonstrates
+- Resource files 
 
 ## Building Projects
 
