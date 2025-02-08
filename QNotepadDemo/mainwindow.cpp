@@ -4,6 +4,10 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QFontDialog>
+#include <QColorDialog>
+#include <QPrintDialog>
+#include <QPrinter>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -134,5 +138,53 @@ void MainWindow::on_actionAbout_Notepad_triggered()
     aboutText = "Author : Somebody\n";
     aboutText += "Date : 06/02/2025";
     QMessageBox::about(this,"About Notepad",aboutText);
+}
+
+
+void MainWindow::on_actionFont_triggered()
+{
+    bool ok;
+    QFont font = QFontDialog::getFont(&ok,this);
+    if(ok){
+        ui->textEdit->setFont(font);
+    }else return;
+
+}
+
+
+void MainWindow::on_actionColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::white,this);
+    if(color.isValid()){
+        ui->textEdit->setTextColor(color);
+    }else return;
+}
+
+
+void MainWindow::on_actionText_Background_Color_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::white,this);
+    if(color.isValid()){
+        ui->textEdit->setTextBackgroundColor(color);
+    }else return;
+}
+
+
+void MainWindow::on_actionPalette_color_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::white,this);
+    if(color.isValid()){
+        ui->textEdit->setPalette(QPalette(color));
+    }else return;
+}
+
+
+void MainWindow::on_actionPrint_triggered()
+{
+    QPrinter printer;
+    printer.setPrinterName("printer name");
+    QPrintDialog dialog(&printer,this);
+    if(dialog.exec() == QDialog::Rejected) return;
+    ui->textEdit->print(&printer);
 }
 
